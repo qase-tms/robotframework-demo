@@ -7,6 +7,7 @@ ${var2}            1
 ${var3}            5
 
 *** Test Cases ***
+# ✅ WORKING: Parameters in test case tags
 Parametrized Test One
     [Tags]     qase.params:[var1, var2]
     Check numbers   ${var1}    ${var2}    ${var3}
@@ -16,7 +17,6 @@ Parametrized Test Two
     [Tags]     qase.params:[var1, var2]
     Check numbers   ${var1}    ${var2}    ${var3}
     Passed Step
-
 
 *** Keywords ***
 Check numbers
