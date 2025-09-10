@@ -1,25 +1,27 @@
 *** Settings ***
 Library    ../../resources/examples/steps.py
 
-*** Variables ***
-${var1}            1
-${var2}            1
-${var3}            5
+*** Keywords ***
+Flash Firmware and Check
+    [Documentation]    ✅ WORKING: Individual test cases with [Template] tag
+    [Arguments]    ${module}    ${uds}=${False}    ${suit}=${False}
+    [Tags]    qase.params:[module]    # ✅ Parameter name without ${} syntax
+    Log    Flashing module: ${module} with UDS: ${uds} and SUIT: ${suit}
+    Passed step
 
 *** Test Cases ***
-# ✅ WORKING: Parameters in test case tags
-Parametrized Test One
-    [Tags]     qase.params:[var1, var2]
-    Check numbers   ${var1}    ${var2}    ${var3}
-    Passed Step
+# ✅ WORKING PATTERN: Individual test cases with [Template] tag
+Flash Module BMS
+    [Tags]    Q-100
+    [Template]    Flash Firmware and Check    # ✅ Test-level template
+    BMS    ${False}    ${False}
 
-Parametrized Test Two
-    [Tags]     qase.params:[var1, var2]
-    Check numbers   ${var1}    ${var2}    ${var3}
-    Passed Step
+Flash Module BMSPOW
+    [Tags]    Q-101  
+    [Template]    Flash Firmware and Check    # ✅ Test-level template
+    BMSPOW    ${True}    ${True}
 
-*** Keywords ***
-Check numbers
-    [Arguments]    ${var1}    ${var2}      ${var3}
-    Should Be Equal As Numbers    ${var1}    ${var2}
-    Should Be Equal As Numbers    ${var3}    ${var3}
+Flash Module FLM
+    [Tags]    Q-102
+    [Template]    Flash Firmware and Check    # ✅ Test-level template
+    FLM    ${False}    ${True}
